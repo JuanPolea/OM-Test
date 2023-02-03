@@ -1,0 +1,15 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+}
+
+android {
+    namespace 'com.jfmr.domain'
+
+}
+
+dependencies {
+    implementation libs.bundles.hilt
+    kapt libs.bundles.hiltkapt
+}
