@@ -1,6 +1,73 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
-plugins {
-    id 'com.android.application' version '8.0.0-beta01' apply false
-    id 'com.android.library' version '8.0.0-beta01' apply false
-    id 'org.jetbrains.kotlin.android' version '1.8.0' apply false
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:7.4.1'
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.20'
+        classpath 'com.google.dagger:hilt-android-gradle-plugin:2.44.2'
+        classpath 'org.jetbrains.kotlin:kotlin-serialization:1.7.20'
+        classpath "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:1.20.0"
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:2.5.3"
+    }
+}
+subprojects { subProject ->
+    subProject.apply plugin: 'kotlin-kapt'
+
+    subProject.apply plugin: 'io.gitlab.arturbosch.detekt'
+
+    detekt {
+        debug = false
+        toolVersion = "1.20.0"
+        input = subProject.files("src")
+        config = files("$rootDir/config/detekt/detekt.yml")
+
+        reports {
+            xml.enabled = false
+            txt.enabled = false
+            html.enabled = true
+        }
+    }
+
+    configurations.all {
+        resolutionStrategy.force 'org.objenesis:objenesis:2.6'
+    }
+
+    afterEvaluate {
+        if (it.hasProperty('android')) {
+            android {
+                compileSdkVersion 33
+                buildToolsVersion "33.0.0"
+
+                defaultConfig {
+                    minSdk 24
+                    targetSdk 33
+                    versionCode 1
+                    versionName "0.0.1"
+                    testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+                }
+                buildTypes {
+                    release {
+                        minifyEnabled false
+                        proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+                    }
+                }
+                compileOptions {
+                    sourceCompatibility JavaVersion.VERSION_17
+                    targetCompatibility JavaVersion.VERSION_17
+                }
+                kotlinOptions {
+                    jvmTarget = '17'
+                }
+                testOptions {
+                    unitTests.returnDefaultValues = true
+                    unitTests.includeAndroidResources = true
+                }
+                packagingOptions {
+                    exclude 'META-INF/*'
+                }
+            }
+        }
+    }
 }
