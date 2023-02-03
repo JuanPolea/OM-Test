@@ -67,3 +67,6 @@ dependencyResolutionManagement {
 }
 rootProject.name = "OMtest"
 include ':app'
+include ':data'
+include ':domain'
+include ':presentation'
