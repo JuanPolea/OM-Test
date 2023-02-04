@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.jfmr.presentation.databinding.FragmentItemBinding
+import com.jfmr.presentation.extensions.loadImage
 import com.jfmr.presentation.unifiedList.model.UnifiedItemList
 
 class UnifiedListAdapter(
@@ -22,8 +23,8 @@ class UnifiedListAdapter(
                     itemDescriptionValue.text = item.description
                     itemGenreValue.text = item.genre
                     itemYearValue.text = item.year.toString()
+                    itemImage.loadImage(item.attachmentUI.first().value)
                 }
-
             }
         }
     }

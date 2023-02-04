@@ -1,4 +1,5 @@
 @file:Suppress("TooManyFunctions")
+
 package com.jfmr.omtest.data.model.extensions
 
 import com.jfmr.domain.model.AllowedTerminalCategoryDomain
@@ -25,6 +26,8 @@ import com.jfmr.omtest.data.model.Response
 import com.jfmr.omtest.data.model.SecurityGroup
 import com.jfmr.omtest.data.model.TvShowReference
 import com.jfmr.omtest.data.model.UnifiedListResponse
+
+private const val BASE_IMAGE_URL = "https://smarttv.orangetv.orange.es/stv/api/rtv/v1/images"
 
 object UnifiedListExtensions {
     internal fun UnifiedListResponse.toDomain(): UnifiedListDomain =
@@ -111,7 +114,7 @@ object UnifiedListExtensions {
             assetId = assetId,
             name = name,
             responseElementType = responseElementType,
-            value = value,
+            value = "$BASE_IMAGE_URL${value}",
             assetName = assetName,
         )
 
