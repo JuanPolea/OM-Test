@@ -1,6 +1,5 @@
 package com.jfmr.domain.model
 
-
 data class ResponseDomain(
     val adsInfo: String,
     val advisories: String,
