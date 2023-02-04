@@ -4,6 +4,8 @@ plugins {
     id 'kotlin-kapt'
     id 'androidx.navigation.safeargs.kotlin'
     id("dagger.hilt.android.plugin")
+    id 'kotlin-parcelize'
+    id "org.jetbrains.kotlin.plugin.serialization"
 }
 
 android {
@@ -11,7 +13,9 @@ android {
     buildFeatures {
         viewBinding true
     }
-
+    viewBinding {
+        enabled = true
+    }
 }
 
 dependencies {
@@ -27,9 +31,9 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
     implementation "androidx.navigation:navigation-fragment:2.5.3"
     implementation "androidx.navigation:navigation-ui:2.5.3"
-
+    implementation 'com.google.android.material:material:1.8.0'
     implementation libs.bundles.hilt
     kapt libs.bundles.hiltkapt
     implementation libs.timber
-
+    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1"
 }

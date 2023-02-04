@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="image_for_list">Image for list</string>
+    <string name="title">Título</string>
+    <string name="description">Descripción:</string>
+    <string name="genre">Género:</string>
+    <string name="year">Año:</string>
+</resources>

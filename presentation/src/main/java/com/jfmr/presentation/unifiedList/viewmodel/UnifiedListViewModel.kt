@@ -4,6 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jfmr.domain.di.QRetrieveUnifiedListUseCase
 import com.jfmr.domain.usecase.RetrieveUnifiedListUseCase
+import com.jfmr.presentation.unifiedList.model.UnifiedItemList
+import com.jfmr.presentation.unifiedList.model.UnifiedListState
+import com.jfmr.presentation.unifiedList.model.toItemList
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
@@ -17,15 +20,24 @@ class UnifiedListViewModel @Inject constructor(
 ) :
     ViewModel() {
 
-    private val _unifiedListState = MutableStateFlow("")
-    internal val unifiedListState = _unifiedListState
+    private val _unifiedListState: MutableStateFlow<UnifiedListState> =
+        MutableStateFlow(UnifiedListState.Loading)
+    internal val unifiedListState: MutableStateFlow<UnifiedListState> = _unifiedListState
 
 
     fun getUnifiedList() {
         viewModelScope.launch {
-            unifiedListUseCase.invoke().collectLatest {
-                Timber.wtf(it.toString())
+            unifiedListUseCase.invoke().collectLatest { unifiedListState ->
+                Timber.wtf(
+                    unifiedListState.responseDomain.map { it.toItemList() }.first().toString()
+                )
+                _unifiedListState.value =
+                    UnifiedListState.Success(unifiedListState.responseDomain.map { it.toItemList() })
             }
         }
+    }
+
+    fun onItemClicked(it: UnifiedItemList) {
+        Timber.wtf("Item clicked: $it")
     }
 }
