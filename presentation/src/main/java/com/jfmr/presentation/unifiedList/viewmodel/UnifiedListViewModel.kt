@@ -10,6 +10,7 @@ import com.jfmr.presentation.unifiedList.model.toItemList
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
@@ -26,6 +27,9 @@ class UnifiedListViewModel @Inject constructor(
 
 
     fun getUnifiedList() {
+        _unifiedListState.update {
+            UnifiedListState.Loading
+        }
         viewModelScope.launch {
             unifiedListUseCase.invoke().collectLatest { unifiedListState ->
                 Timber.wtf(

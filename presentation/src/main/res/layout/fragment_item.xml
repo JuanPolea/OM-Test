@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="12dp"
-    android:background="@color/orange_200">
+    app:cardBackgroundColor="@color/orange_200">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -33,9 +33,12 @@
             android:id="@+id/item_image"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/size_half"
-            android:layout_marginBottom="@dimen/size_half"
+            android:layout_marginBottom="@dimen/size_regular"
+            android:adjustViewBounds="true"
             android:contentDescription="@string/image_for_list"
+            android:fitsSystemWindows="true"
+            android:scaleType="fitCenter"
+            tools:src="@drawable/image_not_available"
             app:layout_constraintBottom_toTopOf="@id/item_name"
             app:layout_constraintEnd_toEndOf="@id/guideline_end"
             app:layout_constraintStart_toStartOf="@id/guideline_start"
@@ -138,7 +141,7 @@
             style="@style/TextAppearance.Material3.BodyMedium"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/size_regular"
+            android:layout_marginBottom="@dimen/size_double"
             android:textAppearance="?attr/textAppearanceListItem"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/guideline_end"
