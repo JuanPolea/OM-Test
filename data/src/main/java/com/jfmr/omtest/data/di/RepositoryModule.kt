@@ -1,9 +1,13 @@
 package com.jfmr.omtest.data.di
 
-import com.jfmr.domain.repository.UnifiedListRepository
-import com.jfmr.omtest.data.remote.UnifiedListRemoteDataSource
-import com.jfmr.omtest.data.remote.UnifiedListRemoteDataSourceImpl
-import com.jfmr.omtest.data.repository.UnifiedListRepositoryImpl
+import com.jfmr.domain.repository.detail.DetailRepository
+import com.jfmr.domain.repository.unifiedList.UnifiedListRepository
+import com.jfmr.omtest.data.remote.detail.DetailRemoteDataSource
+import com.jfmr.omtest.data.remote.detail.DetailRemoteDataSourceImpl
+import com.jfmr.omtest.data.remote.unifiedList.UnifiedListRemoteDataSource
+import com.jfmr.omtest.data.remote.unifiedList.UnifiedListRemoteDataSourceImpl
+import com.jfmr.omtest.data.repository.detail.DetailRepositoryImpl
+import com.jfmr.omtest.data.repository.unifiedList.UnifiedListRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -24,6 +28,14 @@ interface RepositoryModule {
     @Singleton
     @Binds
     fun bindsUnifiedListRemoteDS(implementation: UnifiedListRemoteDataSourceImpl): UnifiedListRemoteDataSource
+
+    @Singleton
+    @Binds
+    fun bindsUDetailRepository(implementation: DetailRepositoryImpl): DetailRepository
+
+    @Singleton
+    @Binds
+    fun bindsDetailRemoteDataSource(implementation: DetailRemoteDataSourceImpl): DetailRemoteDataSource
 
     @Module
     @InstallIn(SingletonComponent::class)

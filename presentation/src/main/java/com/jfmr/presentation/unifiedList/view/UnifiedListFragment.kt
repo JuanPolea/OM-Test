@@ -6,12 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.jfmr.presentation.R
 import com.jfmr.presentation.databinding.FragmentItemListBinding
+import com.jfmr.presentation.extensions.clear
+import com.jfmr.presentation.extensions.loadGif
 import com.jfmr.presentation.unifiedList.model.UnifiedListState
 import com.jfmr.presentation.unifiedList.viewmodel.UnifiedListViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,7 +27,8 @@ class UnifiedListFragment : Fragment() {
     private val viewModel: UnifiedListViewModel by viewModels()
     private var _binding: FragmentItemListBinding? = null
     private val binding get() = _binding!!
-    private val linearLayoutManager = LinearLayoutManager(context)
+    private lateinit var linearLayoutManager: LinearLayoutManager
+    private lateinit var unifiedListAdapter: UnifiedListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,35 +39,39 @@ class UnifiedListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentItemListBinding.inflate(inflater, container, false)
-        binding.rvUnifiedList.layoutManager = linearLayoutManager
-        binding.rvUnifiedList.adapter = UnifiedListAdapter() {
-            viewModel.onItemClicked(it)
-        }.apply {
-            stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
-
-        }
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        linearLayoutManager = LinearLayoutManager(context)
+        binding.rvUnifiedList.layoutManager = linearLayoutManager
+        unifiedListAdapter = UnifiedListAdapter() {
+            viewModel.onItemClicked(it)
+        }
+        binding.rvUnifiedList.adapter = unifiedListAdapter
         viewModel.getUnifiedList()
         viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.unifiedListState.collectLatest { state ->
-                    when (state) {
-                        is UnifiedListState.Loading -> {
-                            binding.progressIndicator.visibility = View.VISIBLE
-                        }
+            viewModel.unifiedListState.collectLatest { state ->
+                when (state) {
+                    is UnifiedListState.Loading -> {
+                        shouldShowLoading(true)
+                    }
 
-                        is UnifiedListState.Success -> {
-                            (binding.rvUnifiedList.adapter as UnifiedListAdapter).submitList(state.unifiedItemLists)
-                            binding.progressIndicator.visibility = View.GONE
-                        }
+                    is UnifiedListState.Success -> {
+                        (binding.rvUnifiedList.adapter as UnifiedListAdapter).submitList(state.unifiedItemLists)
+                        shouldShowLoading(false)
+                    }
 
-                        is UnifiedListState.Error -> {
-                            binding.progressIndicator.visibility = View.GONE
-                        }
+                    is UnifiedListState.Error -> {
+                        shouldShowLoading(false)
+                    }
+
+                    is UnifiedListState.NavigateToDetail -> {
+                        shouldShowLoading(false)
+                        binding.root.findNavController().navigate(
+                            UnifiedListFragmentDirections.actionItemFragmentToDetailFragment(state.id)
+                        )
                     }
                 }
             }
@@ -85,5 +92,20 @@ class UnifiedListFragment : Fragment() {
                     }
             }
         })
+    }
+
+    private fun shouldShowLoading(shouLoading: Boolean) {
+        if (shouLoading) {
+            binding.ivLoading.loadGif(R.raw.ic_movie_scene)
+            binding.ivLoading.visibility = View.VISIBLE
+        } else {
+            binding.ivLoading.visibility = View.GONE
+            binding.ivLoading.clear(this@UnifiedListFragment)
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 }
