@@ -1,4 +1,4 @@
-package com.jfmr.omtest.data.model
+package com.jfmr.omtest.data.model.rtv1
 
 import com.google.gson.annotations.SerializedName
 

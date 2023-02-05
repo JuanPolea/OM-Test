@@ -2,40 +2,48 @@
 
 package com.jfmr.omtest.data.model.extensions
 
-import com.jfmr.domain.model.AllowedTerminalCategoryDomain
-import com.jfmr.domain.model.AttachmentDomain
-import com.jfmr.domain.model.AwardDomain
-import com.jfmr.domain.model.EncodingDomain
-import com.jfmr.domain.model.ExtrafieldDomain
-import com.jfmr.domain.model.GenreEntityDomain
-import com.jfmr.domain.model.MetadataDomain
-import com.jfmr.domain.model.MetadataXDomain
-import com.jfmr.domain.model.ResponseDomain
-import com.jfmr.domain.model.SecurityGroupDomain
-import com.jfmr.domain.model.TvShowReferenceDomain
-import com.jfmr.domain.model.UnifiedListDomain
-import com.jfmr.omtest.data.model.AllowedTerminalCategory
-import com.jfmr.omtest.data.model.Attachment
-import com.jfmr.omtest.data.model.Award
-import com.jfmr.omtest.data.model.Encoding
-import com.jfmr.omtest.data.model.Extrafield
-import com.jfmr.omtest.data.model.GenreEntity
-import com.jfmr.omtest.data.model.Metadata
-import com.jfmr.omtest.data.model.MetadataX
-import com.jfmr.omtest.data.model.Response
-import com.jfmr.omtest.data.model.SecurityGroup
-import com.jfmr.omtest.data.model.TvShowReference
-import com.jfmr.omtest.data.model.UnifiedListResponse
+import com.jfmr.domain.model.rtv1.AllowedTerminalCategoryDomain
+import com.jfmr.domain.model.rtv1.AttachmentDomain
+import com.jfmr.domain.model.rtv1.AwardDomain
+import com.jfmr.domain.model.rtv1.EncodingDomain
+import com.jfmr.domain.model.rtv1.ExtrafieldDomain
+import com.jfmr.domain.model.rtv1.GenreEntityDomain
+import com.jfmr.domain.model.rtv1.MetadataDomain
+import com.jfmr.domain.model.rtv1.MetadataXDomain
+import com.jfmr.domain.model.rtv1.RTV1DetailDomain
+import com.jfmr.domain.model.rtv1.ResponseDomain
+import com.jfmr.domain.model.rtv1.SecurityGroupDomain
+import com.jfmr.domain.model.rtv1.TvShowReferenceDomain
+import com.jfmr.domain.model.rtv1.RTV1Domain
+import com.jfmr.omtest.data.model.rtv1.AllowedTerminalCategory
+import com.jfmr.omtest.data.model.rtv1.Attachment
+import com.jfmr.omtest.data.model.rtv1.Award
+import com.jfmr.omtest.data.model.rtv1.Encoding
+import com.jfmr.omtest.data.model.rtv1.Extrafield
+import com.jfmr.omtest.data.model.rtv1.GenreEntity
+import com.jfmr.omtest.data.model.rtv1.Metadata
+import com.jfmr.omtest.data.model.rtv1.MetadataX
+import com.jfmr.omtest.data.model.rtv1.RTV1DetailResponse
+import com.jfmr.omtest.data.model.rtv1.Response
+import com.jfmr.omtest.data.model.rtv1.SecurityGroup
+import com.jfmr.omtest.data.model.rtv1.TvShowReference
+import com.jfmr.omtest.data.model.rtv1.RTV1Response
 
 private const val BASE_IMAGE_URL = "https://smarttv.orangetv.orange.es/stv/api/rtv/v1/images"
 
-object UnifiedListExtensions {
-    internal fun UnifiedListResponse.toDomain(): UnifiedListDomain =
-        UnifiedListDomain(
+object RTV1Extensions {
+    internal fun RTV1Response.toDomain(): RTV1Domain =
+        RTV1Domain(
             metadataDomain = metadata.toDomain(),
             responseDomain = response.map { it.toDomain() }
         )
 
+
+    internal fun RTV1DetailResponse.toDetailDomain(): RTV1DetailDomain =
+        RTV1DetailDomain(
+            metadata = metadata.toDomain(),
+            response = response.toDomain()
+        )
 
     private fun Metadata.toDomain(): MetadataDomain =
         MetadataDomain(

@@ -1,4 +1,4 @@
-package com.jfmr.omtest.data.remote
+package com.jfmr.omtest.data.remote.unifiedList
 
 import com.jfmr.omtest.data.api.OMService
 import com.jfmr.omtest.data.di.Dispatchers
