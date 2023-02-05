@@ -1,4 +1,4 @@
-package com.jfmr.domain.model
+package com.jfmr.domain.model.rtv1
 
 data class MetadataDomain(
     val fullLength: Int = 0,
