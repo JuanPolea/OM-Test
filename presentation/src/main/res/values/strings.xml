@@ -6,4 +6,6 @@
     <string name="genre">Género:</string>
     <string name="year">Año:</string>
     <string name="scroll_up">Scrool Up</string>
+    <string name="definition">Definition:</string>
+    <string name="review">Review:</string>
 </resources>

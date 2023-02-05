@@ -5,45 +5,30 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:layout_margin="12dp"
     app:cardBackgroundColor="@color/orange_200">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginBottom="@dimen/size_half"
         android:orientation="horizontal">
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline_start"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.05" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline_end"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.95" />
 
         <ImageView
             android:id="@+id/item_image"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/size_regular"
-            android:adjustViewBounds="true"
-            android:contentDescription="@string/image_for_list"
-            android:fitsSystemWindows="true"
-            android:scaleType="fitCenter"
-            tools:src="@drawable/image_not_available"
+            android:layout_margin="@dimen/size_double"
+            android:contentDescription="@string/description"
             app:layout_constraintBottom_toTopOf="@id/item_name"
-            app:layout_constraintEnd_toEndOf="@id/guideline_end"
-            app:layout_constraintStart_toStartOf="@id/guideline_start"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:scaleType="fitCenter"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="packed" />
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:src="@drawable/image_not_available" />
 
         <TextView
             android:id="@+id/item_name"
@@ -54,8 +39,8 @@
             android:text="@string/title"
             android:textAppearance="?attr/textAppearanceListItem"
             app:layout_constraintBottom_toTopOf="@id/item_name_value"
-            app:layout_constraintEnd_toEndOf="@id/guideline_end"
-            app:layout_constraintStart_toStartOf="@id/guideline_start"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/item_image" />
 
         <TextView
@@ -65,36 +50,10 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/size_regular"
             android:textAppearance="?attr/textAppearanceListItem"
-            app:layout_constraintBottom_toTopOf="@id/item_description"
-            app:layout_constraintEnd_toEndOf="@id/guideline_end"
-            app:layout_constraintStart_toStartOf="@id/guideline_start"
-            app:layout_constraintTop_toBottomOf="@id/item_name"
-            tools:text="test" />
-
-        <TextView
-            android:id="@+id/item_description"
-            style="@style/TextAppearance.Material3.TitleSmall"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/size_half"
-            android:text="@string/description"
-            android:textAppearance="?attr/textAppearanceListItem"
-            app:layout_constraintBottom_toTopOf="@id/item_description_value"
-            app:layout_constraintEnd_toEndOf="@id/guideline_end"
-            app:layout_constraintStart_toStartOf="@id/guideline_start"
-            app:layout_constraintTop_toBottomOf="@id/item_name_value" />
-
-        <TextView
-            android:id="@+id/item_description_value"
-            style="@style/TextAppearance.Material3.BodyMedium"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/size_regular"
-            android:textAppearance="?attr/textAppearanceListItem"
             app:layout_constraintBottom_toTopOf="@id/item_genre"
-            app:layout_constraintEnd_toEndOf="@id/guideline_end"
-            app:layout_constraintStart_toStartOf="@id/guideline_start"
-            app:layout_constraintTop_toBottomOf="@id/item_description"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/item_name"
             tools:text="test" />
 
         <TextView
@@ -105,10 +64,10 @@
             android:layout_marginBottom="@dimen/size_half"
             android:text="@string/genre"
             android:textAppearance="?attr/textAppearanceListItem"
-            app:layout_constraintBottom_toTopOf="@id/item_year"
-            app:layout_constraintEnd_toEndOf="@id/guideline_end"
-            app:layout_constraintStart_toStartOf="@id/guideline_start"
-            app:layout_constraintTop_toBottomOf="@id/item_description_value" />
+            app:layout_constraintBottom_toTopOf="@id/item_genre_value"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/item_name_value" />
 
         <TextView
             android:id="@+id/item_genre_value"
@@ -118,8 +77,8 @@
             android:layout_marginBottom="@dimen/size_regular"
             android:textAppearance="?attr/textAppearanceListItem"
             app:layout_constraintBottom_toTopOf="@id/item_year"
-            app:layout_constraintEnd_toEndOf="@id/guideline_end"
-            app:layout_constraintStart_toStartOf="@id/guideline_start"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/item_genre"
             tools:text="test" />
 
@@ -132,8 +91,8 @@
             android:text="@string/year"
             android:textAppearance="?attr/textAppearanceListItem"
             app:layout_constraintBottom_toTopOf="@id/item_year_value"
-            app:layout_constraintEnd_toEndOf="@id/guideline_end"
-            app:layout_constraintStart_toStartOf="@id/guideline_start"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/item_genre_value" />
 
         <TextView
@@ -144,8 +103,8 @@
             android:layout_marginBottom="@dimen/size_double"
             android:textAppearance="?attr/textAppearanceListItem"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/guideline_end"
-            app:layout_constraintStart_toStartOf="@id/guideline_start"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/item_year"
             tools:text="test" />
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".detail.view.DetailFragment">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/orange_200">
+
+            <include
+                android:id="@+id/guideline_start"
+                layout="@layout/guide_line_start" />
+
+            <include
+                android:id="@+id/guideline_end"
+                layout="@layout/guide_line_end" />
+
+            <ImageView
+                android:id="@+id/iv_detail"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/size_double"
+                android:contentDescription="@string/description"
+                android:fitsSystemWindows="true"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                app:layout_constraintBottom_toTopOf="@id/item_name"
+                app:layout_constraintEnd_toEndOf="@id/guideline_end"
+                app:layout_constraintStart_toStartOf="@id/guideline_start"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="spread_inside"
+                tools:srcCompat="@drawable/image_not_available" />
+
+
+            <TextView
+                android:id="@+id/item_name"
+                style="@style/TextAppearance.Material3.TitleMedium"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/size_half"
+                android:text="@string/title"
+                android:textAppearance="?attr/textAppearanceTitleMedium"
+                app:layout_constraintBottom_toTopOf="@id/item_name_value"
+                app:layout_constraintEnd_toEndOf="@id/guideline_end"
+                app:layout_constraintStart_toStartOf="@id/guideline_start"
+                app:layout_constraintTop_toBottomOf="@id/iv_detail" />
+
+            <TextView
+                android:id="@+id/item_name_value"
+                style="@style/TextAppearance.Material3.BodyLarge"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/size_regular"
+                android:textAppearance="?attr/textAppearanceTitleMedium"
+                app:layout_constraintBottom_toTopOf="@id/item_description_detail"
+                app:layout_constraintEnd_toEndOf="@id/guideline_end"
+                app:layout_constraintStart_toStartOf="@id/guideline_start"
+                app:layout_constraintTop_toBottomOf="@id/item_name"
+                tools:text="test" />
+
+            <TextView
+                android:id="@+id/item_description_detail"
+                style="@style/TextAppearance.Material3.TitleMedium"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/size_half"
+                android:text="@string/description"
+                android:textAppearance="?attr/textAppearanceListItem"
+                app:layout_constraintBottom_toTopOf="@id/item_description_value"
+                app:layout_constraintEnd_toEndOf="@id/guideline_end"
+                app:layout_constraintStart_toStartOf="@id/guideline_start"
+                app:layout_constraintTop_toBottomOf="@id/item_name_value" />
+
+            <TextView
+                android:id="@+id/item_description_value"
+                style="@style/TextAppearance.Material3.BodyLarge"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/size_regular"
+                android:textAppearance="?attr/textAppearanceListItem"
+                app:layout_constraintBottom_toTopOf="@id/item_genre"
+                app:layout_constraintEnd_toEndOf="@id/guideline_end"
+                app:layout_constraintStart_toStartOf="@id/guideline_start"
+                app:layout_constraintTop_toBottomOf="@id/item_description_detail"
+                tools:text="test" />
+
+            <TextView
+                android:id="@+id/item_genre"
+                style="@style/TextAppearance.Material3.TitleMedium"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/size_half"
+                android:text="@string/genre"
+                android:textAppearance="?attr/textAppearanceListItem"
+                app:layout_constraintBottom_toTopOf="@id/item_year"
+                app:layout_constraintEnd_toEndOf="@id/guideline_end"
+                app:layout_constraintStart_toStartOf="@id/guideline_start"
+                app:layout_constraintTop_toBottomOf="@id/item_description_value" />
+
+            <TextView
+                android:id="@+id/item_genre_value"
+                style="@style/TextAppearance.Material3.BodyLarge"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/size_regular"
+                android:textAppearance="?attr/textAppearanceListItem"
+                app:layout_constraintBottom_toTopOf="@id/item_year"
+                app:layout_constraintEnd_toEndOf="@id/guideline_end"
+                app:layout_constraintStart_toStartOf="@id/guideline_start"
+                app:layout_constraintTop_toBottomOf="@id/item_genre"
+                tools:text="test" />
+
+            <TextView
+                android:id="@+id/item_year"
+                style="@style/TextAppearance.Material3.TitleMedium"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/size_half"
+                android:text="@string/year"
+                android:textAppearance="?attr/textAppearanceListItem"
+                app:layout_constraintBottom_toTopOf="@id/item_year_value"
+                app:layout_constraintEnd_toEndOf="@id/guideline_end"
+                app:layout_constraintStart_toStartOf="@id/guideline_start"
+                app:layout_constraintTop_toBottomOf="@id/item_genre_value" />
+
+            <TextView
+                android:id="@+id/item_year_value"
+                style="@style/TextAppearance.Material3.BodyLarge"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/size_double"
+                android:textAppearance="?attr/textAppearanceListItem"
+                app:layout_constraintBottom_toTopOf="@id/item_definition"
+                app:layout_constraintEnd_toEndOf="@id/guideline_end"
+                app:layout_constraintStart_toStartOf="@id/guideline_start"
+                app:layout_constraintTop_toBottomOf="@id/item_year"
+                tools:text="test" />
+
+            <TextView
+                android:id="@+id/item_definition"
+                style="@style/TextAppearance.Material3.TitleMedium"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/size_half"
+                android:text="@string/definition"
+                android:textAppearance="?attr/textAppearanceListItem"
+                app:layout_constraintBottom_toTopOf="@id/item_definition_value"
+                app:layout_constraintEnd_toEndOf="@id/guideline_end"
+                app:layout_constraintStart_toStartOf="@id/guideline_start"
+                app:layout_constraintTop_toBottomOf="@id/item_year_value" />
+
+            <TextView
+                android:id="@+id/item_definition_value"
+                style="@style/TextAppearance.Material3.BodyLarge"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/size_double"
+                android:textAppearance="?attr/textAppearanceListItem"
+                app:layout_constraintBottom_toTopOf="@id/item_review"
+                app:layout_constraintEnd_toEndOf="@id/guideline_end"
+                app:layout_constraintStart_toStartOf="@id/guideline_start"
+                app:layout_constraintTop_toBottomOf="@id/item_definition"
+                tools:text="test" />
+
+            <TextView
+                android:id="@+id/item_review"
+                style="@style/TextAppearance.Material3.TitleMedium"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/size_half"
+                android:text="@string/review"
+                android:textAppearance="?attr/textAppearanceListItem"
+                app:layout_constraintBottom_toTopOf="@id/item_definition_value"
+                app:layout_constraintEnd_toEndOf="@id/guideline_end"
+                app:layout_constraintStart_toStartOf="@id/guideline_start"
+                app:layout_constraintTop_toBottomOf="@id/item_review_value" />
+
+            <TextView
+                android:id="@+id/item_review_value"
+                style="@style/TextAppearance.Material3.BodyLarge"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/size_double"
+                android:textAppearance="?attr/textAppearanceListItem"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/guideline_end"
+                app:layout_constraintStart_toStartOf="@id/guideline_start"
+                app:layout_constraintTop_toBottomOf="@id/item_review"
+                tools:text="test" />
+
+            <ImageView
+                android:id="@+id/iv_loading"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/description"
+                android:fitsSystemWindows="false"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:showIn="@layout/fragment_item_list" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</FrameLayout>

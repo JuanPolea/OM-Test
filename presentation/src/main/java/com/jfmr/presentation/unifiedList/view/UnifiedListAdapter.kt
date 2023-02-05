@@ -5,8 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.jfmr.presentation.databinding.FragmentItemBinding
-import com.jfmr.presentation.extensions.loadImage
 import com.jfmr.presentation.unifiedList.model.UnifiedItemList
 
 class UnifiedListAdapter(
@@ -14,17 +14,17 @@ class UnifiedListAdapter(
 ) : ListAdapter<UnifiedItemList, UnifiedListAdapter.ViewHolder>(DiffUtilCallback) {
 
     class ViewHolder(private val binding: FragmentItemBinding) :
+
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: UnifiedItemList?) {
             if (item != null) {
                 with(binding) {
                     itemNameValue.text = item.name
-                    itemDescriptionValue.text = item.description
                     itemGenreValue.text = item.genre
                     itemYearValue.text = item.year.toString()
-                    itemImage.loadImage(item.attachmentUI.first().value)
                 }
+                binding.itemImage.load(item.attachmentUI.first().value)
             }
         }
     }
@@ -33,8 +33,10 @@ class UnifiedListAdapter(
         ViewHolder(FragmentItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
 
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) =
-        holder.bind(getItem(position))
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.itemView.setOnClickListener { listener(getItem(position)) }
+        return holder.bind(getItem(position))
+    }
 
 }
 

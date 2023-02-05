@@ -9,5 +9,19 @@
         android:id="@+id/itemFragment"
         android:name="com.jfmr.presentation.unifiedList.view.UnifiedListFragment"
         android:label="fragment_item_list"
-        tools:layout="@layout/fragment_item_list" />
+        tools:layout="@layout/fragment_item_list">
+        <action
+            android:id="@+id/action_itemFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.jfmr.presentation.detail.view.DetailFragment"
+        android:label="fragment_detail"
+        tools:layout="@layout/fragment_detail">
+        <argument
+            android:name="externalIds"
+            android:defaultValue=""
+            app:argType="string" />
+    </fragment>
 </navigation>

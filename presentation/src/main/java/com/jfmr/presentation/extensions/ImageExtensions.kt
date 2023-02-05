@@ -1,13 +1,15 @@
 package com.jfmr.presentation.extensions
 
 import android.widget.ImageView
+import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
-
-fun ImageView.loadImage(url: String) {
+fun ImageView.loadGif(rawResource: Int) {
     Glide
         .with(this.context)
-        .load(url)
-        .transition(withCrossFade())
+        .asGif()
+        .load(rawResource)
         .into(this)
 }
+
+fun ImageView.clear(fragment: Fragment) =
+    Glide.with(fragment).clear(this)

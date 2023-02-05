@@ -3,7 +3,7 @@ package com.jfmr.presentation.unifiedList.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jfmr.domain.di.QRetrieveUnifiedListUseCase
-import com.jfmr.domain.usecase.RetrieveUnifiedListUseCase
+import com.jfmr.domain.usecase.unifiedList.RetrieveUnifiedListUseCase
 import com.jfmr.presentation.unifiedList.model.UnifiedItemList
 import com.jfmr.presentation.unifiedList.model.UnifiedListState
 import com.jfmr.presentation.unifiedList.model.toItemList
@@ -41,7 +41,8 @@ class UnifiedListViewModel @Inject constructor(
         }
     }
 
-    fun onItemClicked(it: UnifiedItemList) {
-        Timber.wtf("Item clicked: $it")
-    }
+    fun onItemClicked(unifiedItemList: UnifiedItemList) =
+        _unifiedListState.update {
+            UnifiedListState.NavigateToDetail(unifiedItemList.externalId)
+        }
 }

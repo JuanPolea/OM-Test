@@ -1,8 +1,8 @@
 package com.jfmr.presentation.unifiedList.model
 
 import android.os.Parcelable
-import com.jfmr.domain.model.AttachmentDomain
-import com.jfmr.domain.model.ResponseDomain
+import com.jfmr.domain.model.rtv1.AttachmentDomain
+import com.jfmr.domain.model.rtv1.ResponseDomain
 import kotlinx.parcelize.Parcelize
 import kotlinx.serialization.Serializable
 
@@ -16,6 +16,7 @@ sealed interface UnifiedListState {
     ) : UnifiedListState
 
     object Loading : UnifiedListState
+    data class NavigateToDetail(val id: String) : UnifiedListState
 }
 
 @Parcelize
@@ -28,6 +29,7 @@ data class UnifiedItemList(
     val attachmentUI: List<AttachmentUI>,
     val type: String,
     val genre: String,
+    val externalId: String = "",
 ) : Parcelable
 
 @Parcelize
@@ -47,10 +49,11 @@ internal fun ResponseDomain.toItemList(): UnifiedItemList = UnifiedItemList(
     year = year,
     attachmentUI = attachments.map { it.toUI() },
     type = type,
-    genre = genreEntityList.joinToString(", ") { it.name }
+    genre = genreEntityList.joinToString(", ") { it.name },
+    externalId = externalId,
 )
 
-private fun AttachmentDomain.toUI(): AttachmentUI = AttachmentUI(
+fun AttachmentDomain.toUI(): AttachmentUI = AttachmentUI(
     assetId = assetId,
     assetName = assetName,
     name = name,
