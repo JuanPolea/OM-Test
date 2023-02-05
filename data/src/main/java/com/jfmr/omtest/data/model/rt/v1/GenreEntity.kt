@@ -1,4 +1,4 @@
-package com.jfmr.omtest.data.model.rtv1
+package com.jfmr.omtest.data.model.rt.v1
 
 data class GenreEntity(
     val externalId: String,

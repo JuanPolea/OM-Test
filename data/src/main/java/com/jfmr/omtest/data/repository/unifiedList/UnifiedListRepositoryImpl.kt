@@ -2,8 +2,8 @@ package com.jfmr.omtest.data.repository.unifiedList
 
 import com.jfmr.domain.model.rtv1.RTV1Domain
 import com.jfmr.domain.repository.unifiedList.UnifiedListRepository
-import com.jfmr.omtest.data.model.rtv1.RTV1Response
-import com.jfmr.omtest.data.model.extensions.RTV1Extensions.toDomain
+import com.jfmr.omtest.data.model.rt.v1.RTV1Response
+import com.jfmr.omtest.data.model.rt.v1.extensions.RTV1Extensions.toDomain
 import com.jfmr.omtest.data.remote.unifiedList.UnifiedListRemoteDataSource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

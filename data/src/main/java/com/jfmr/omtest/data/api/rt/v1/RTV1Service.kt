@@ -1,14 +1,14 @@
-package com.jfmr.omtest.data.api
+package com.jfmr.omtest.data.api.rt.v1
 
-import com.jfmr.omtest.data.api.EndPoints.GET_VIDEO
-import com.jfmr.omtest.data.api.EndPoints.UNIFIED_URL
-import com.jfmr.omtest.data.model.rtv1.RTV1DetailResponse
-import com.jfmr.omtest.data.model.rtv1.RTV1Response
+import com.jfmr.omtest.data.api.rt.v1.RTV1EndPoints.GET_VIDEO
+import com.jfmr.omtest.data.api.rt.v1.RTV1EndPoints.UNIFIED_URL
+import com.jfmr.omtest.data.model.rt.v1.RTV1DetailResponse
+import com.jfmr.omtest.data.model.rt.v1.RTV1Response
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface OMService {
+interface RTV1Service {
 
     @GET(UNIFIED_URL)
     suspend fun retrieveUnifiedList(

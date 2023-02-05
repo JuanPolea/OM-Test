@@ -1,6 +1,6 @@
-package com.jfmr.omtest.data.model.rtv1
+package com.jfmr.omtest.data.model.rt.v1
 
-data class Extrafield(
+data class MetadataX(
     val name: String,
     val responseElementType: String,
     val value: String

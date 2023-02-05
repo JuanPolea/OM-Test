@@ -1,6 +1,6 @@
 @file:Suppress("TooManyFunctions")
 
-package com.jfmr.omtest.data.model.extensions
+package com.jfmr.omtest.data.model.rt.v1.extensions
 
 import com.jfmr.domain.model.rtv1.AllowedTerminalCategoryDomain
 import com.jfmr.domain.model.rtv1.AttachmentDomain
@@ -15,19 +15,19 @@ import com.jfmr.domain.model.rtv1.ResponseDomain
 import com.jfmr.domain.model.rtv1.SecurityGroupDomain
 import com.jfmr.domain.model.rtv1.TvShowReferenceDomain
 import com.jfmr.domain.model.rtv1.RTV1Domain
-import com.jfmr.omtest.data.model.rtv1.AllowedTerminalCategory
-import com.jfmr.omtest.data.model.rtv1.Attachment
-import com.jfmr.omtest.data.model.rtv1.Award
-import com.jfmr.omtest.data.model.rtv1.Encoding
-import com.jfmr.omtest.data.model.rtv1.Extrafield
-import com.jfmr.omtest.data.model.rtv1.GenreEntity
-import com.jfmr.omtest.data.model.rtv1.Metadata
-import com.jfmr.omtest.data.model.rtv1.MetadataX
-import com.jfmr.omtest.data.model.rtv1.RTV1DetailResponse
-import com.jfmr.omtest.data.model.rtv1.Response
-import com.jfmr.omtest.data.model.rtv1.SecurityGroup
-import com.jfmr.omtest.data.model.rtv1.TvShowReference
-import com.jfmr.omtest.data.model.rtv1.RTV1Response
+import com.jfmr.omtest.data.model.rt.v1.AllowedTerminalCategory
+import com.jfmr.omtest.data.model.rt.v1.Attachment
+import com.jfmr.omtest.data.model.rt.v1.Award
+import com.jfmr.omtest.data.model.rt.v1.Encoding
+import com.jfmr.omtest.data.model.rt.v1.Extrafield
+import com.jfmr.omtest.data.model.rt.v1.GenreEntity
+import com.jfmr.omtest.data.model.rt.v1.Metadata
+import com.jfmr.omtest.data.model.rt.v1.MetadataX
+import com.jfmr.omtest.data.model.rt.v1.RTV1DetailResponse
+import com.jfmr.omtest.data.model.rt.v1.Response
+import com.jfmr.omtest.data.model.rt.v1.SecurityGroup
+import com.jfmr.omtest.data.model.rt.v1.TvShowReference
+import com.jfmr.omtest.data.model.rt.v1.RTV1Response
 
 private const val BASE_IMAGE_URL = "https://smarttv.orangetv.orange.es/stv/api/rtv/v1/images"
 
