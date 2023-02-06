@@ -7,11 +7,11 @@ import retrofit2.Response
 import javax.inject.Inject
 
 class RecommendationsDataSourceImpl @Inject constructor(
-    @QSTVService private val recommendationsService: STVService
+    @QSTVService private val recommendationsService: STVService,
 ) : RecommendationsDataSource {
 
     override suspend fun retrieveRecommendations(externalId: String): Response<STVResponse> {
         return recommendationsService
-            .retrieveContentRecommendations(params = "external_content_id:top-gun-$externalId")
+            .retrieveContentRecommendations(params = "external_content_id:la-momia-2017")
     }
 }

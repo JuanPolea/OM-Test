@@ -33,7 +33,6 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
     implementation "androidx.navigation:navigation-fragment-ktx:2.5.3"
     implementation "androidx.navigation:navigation-ui-ktx:2.5.3"
-    implementation 'com.google.android.material:material:1.8.0'
     implementation libs.bundles.hilt
     kapt libs.bundles.hiltkapt
     implementation libs.timber
@@ -43,4 +42,5 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.14.2'
     implementation 'androidx.constraintlayout:constraintlayout:2.2.0-alpha06'
     implementation 'com.github.IslamKhSh:CardSlider:1.0.1'
+    implementation 'androidx.coordinatorlayout:coordinatorlayout:1.2.0'
 }

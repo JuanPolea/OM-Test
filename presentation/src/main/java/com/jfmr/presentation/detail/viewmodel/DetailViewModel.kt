@@ -10,6 +10,7 @@ import com.jfmr.presentation.detail.model.DetailState
 import com.jfmr.presentation.detail.model.toUI
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -33,11 +34,11 @@ class DetailViewModel @Inject constructor(
         viewModelScope.launch {
             detailUseCase
                 .invoke(externalId)
-                .also {
-                    it?.let { detail ->
+                .collectLatest {
+                    it?.let { rtDomain ->
+                        Timber.wtf(" rtDomain ${rtDomain.toUI()}")
                         _detailState.update {
-                            Timber.wtf(" Stae ${detail.toUI()}")
-                            DetailState.Success(detail.toUI())
+                            DetailState.Success(rtDomain.toUI())
                         }
                     }
                 }
@@ -52,6 +53,9 @@ class DetailViewModel @Inject constructor(
 
             DetailEvent.NavigateBack -> _detailState.update {
                 DetailState.NavigateBack
+            }
+
+            is DetailEvent.OnRecommendedCliked -> {
             }
         }
     }

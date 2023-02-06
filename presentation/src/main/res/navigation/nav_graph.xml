@@ -17,11 +17,13 @@
     <fragment
         android:id="@+id/detailFragment"
         android:name="com.jfmr.presentation.detail.view.DetailFragment"
-        android:label="fragment_detail"
         tools:layout="@layout/fragment_detail">
         <argument
             android:name="externalIds"
             android:defaultValue=""
             app:argType="string" />
+        <action
+            android:id="@+id/action_detailFragment_self"
+            app:destination="@id/detailFragment" />
     </fragment>
 </navigation>

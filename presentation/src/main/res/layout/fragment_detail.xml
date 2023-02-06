@@ -1,20 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".detail.view.DetailFragment">
+    android:background="@color/orange_200"
+    android:fitsSystemWindows="true"
+    tools:context="com.jfmr.presentation.detail.view.DetailFragment">
 
-    <androidx.core.widget.NestedScrollView
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fillViewport="true">
+        android:fitsSystemWindows="true"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+            <ImageView
+                android:id="@+id/iv_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/description"
+                app:layout_collapseMode="parallax" />
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/detail_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:background="@color/orange_200">
+
+
+            <ProgressBar
+                android:id="@+id/iv_loading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/description"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:showIn="@layout/fragment_item_list" />
 
             <include
                 android:id="@+id/guideline_start"
@@ -24,191 +72,198 @@
                 android:id="@+id/guideline_end"
                 layout="@layout/guide_line_end" />
 
-            <ImageView
-                android:id="@+id/iv_detail"
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_view"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/size_double"
-                android:contentDescription="@string/description"
-                android:fitsSystemWindows="true"
-                android:scaleType="fitCenter"
-                android:adjustViewBounds="true"
-                app:layout_constraintBottom_toTopOf="@id/item_name"
+                app:cardBackgroundColor="@color/orange_500"
+                app:cardElevation="@dimen/size_double"
+                app:layout_constraintBottom_toTopOf="@id/rv_recommendations"
                 app:layout_constraintEnd_toEndOf="@id/guideline_end"
                 app:layout_constraintStart_toStartOf="@id/guideline_start"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_chainStyle="spread_inside"
-                tools:srcCompat="@drawable/image_not_available" />
+                app:layout_constraintVertical_chainStyle="packed"
+                tools:background="@color/orange_500">
 
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/size_double">
+
+                    <TextView
+                        android:id="@+id/item_description_detail"
+                        style="@style/TextAppearance.Material3.TitleMedium"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/size_half"
+                        android:text="@string/description"
+                        android:textAppearance="?attr/textAppearanceListItem"
+                        app:layout_constraintBottom_toTopOf="@id/item_description_value"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/item_description_value"
+                        style="@style/TextAppearance.Material3.BodyLarge"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/size_regular"
+                        android:textAppearance="?attr/textAppearanceListItem"
+                        app:layout_constraintBottom_toTopOf="@id/item_genre"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/item_description_detail"
+                        tools:text="test" />
+
+                    <TextView
+                        android:id="@+id/item_genre"
+                        style="@style/TextAppearance.Material3.TitleMedium"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/size_half"
+                        android:text="@string/genre"
+                        android:textAppearance="?attr/textAppearanceListItem"
+                        app:layout_constraintBottom_toTopOf="@id/item_genre_value"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/item_description_value" />
+
+                    <TextView
+                        android:id="@+id/item_genre_value"
+                        style="@style/TextAppearance.Material3.BodyLarge"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/size_regular"
+                        android:textAppearance="?attr/textAppearanceListItem"
+                        app:layout_constraintBottom_toTopOf="@id/item_year"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/item_genre"
+                        tools:text="test" />
+
+                    <TextView
+                        android:id="@+id/item_year"
+                        style="@style/TextAppearance.Material3.TitleMedium"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/size_half"
+                        android:text="@string/year"
+                        android:textAppearance="?attr/textAppearanceListItem"
+                        app:layout_constraintBottom_toTopOf="@id/item_year_value"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/item_genre_value" />
+
+                    <TextView
+                        android:id="@+id/item_year_value"
+                        style="@style/TextAppearance.Material3.BodyLarge"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/size_double"
+                        android:textAppearance="?attr/textAppearanceListItem"
+                        app:layout_constraintBottom_toTopOf="@id/item_definition"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/item_year"
+                        tools:text="test" />
+
+                    <TextView
+                        android:id="@+id/item_definition"
+                        style="@style/TextAppearance.Material3.TitleMedium"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/size_half"
+                        android:text="@string/definition"
+                        android:textAppearance="?attr/textAppearanceListItem"
+                        app:layout_constraintBottom_toTopOf="@id/item_definition_value"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/item_year_value" />
+
+                    <TextView
+                        android:id="@+id/item_definition_value"
+                        style="@style/TextAppearance.Material3.BodyLarge"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/size_double"
+                        android:textAppearance="?attr/textAppearanceListItem"
+                        app:layout_constraintBottom_toTopOf="@id/item_review"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/item_definition"
+                        tools:text="test" />
+
+                    <TextView
+                        android:id="@+id/item_review"
+                        style="@style/TextAppearance.Material3.TitleMedium"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/size_half"
+                        android:text="@string/review"
+                        android:textAppearance="?attr/textAppearanceListItem"
+                        app:layout_constraintBottom_toTopOf="@id/item_definition_value"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/item_review_value" />
+
+                    <TextView
+                        android:id="@+id/item_review_value"
+                        style="@style/TextAppearance.Material3.BodyLarge"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/size_regular"
+                        android:textAppearance="?attr/textAppearanceListItem"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/item_review"
+                        app:layout_constraintVertical_chainStyle="packed"
+                        tools:text="test" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
 
             <TextView
-                android:id="@+id/item_name"
+                android:id="@+id/tv_recommendation"
                 style="@style/TextAppearance.Material3.TitleMedium"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/size_half"
-                android:text="@string/title"
-                android:textAppearance="?attr/textAppearanceTitleMedium"
-                app:layout_constraintBottom_toTopOf="@id/item_name_value"
+                android:layout_marginTop="@dimen/size_regular"
+                android:text="@string/recommendations"
+                app:layout_constraintBottom_toTopOf="@id/rv_recommendations"
                 app:layout_constraintEnd_toEndOf="@id/guideline_end"
                 app:layout_constraintStart_toStartOf="@id/guideline_start"
-                app:layout_constraintTop_toBottomOf="@id/iv_detail" />
+                app:layout_constraintTop_toBottomOf="@id/card_view" />
 
-            <TextView
-                android:id="@+id/item_name_value"
-                style="@style/TextAppearance.Material3.BodyLarge"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_recommendations"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/size_regular"
-                android:textAppearance="?attr/textAppearanceTitleMedium"
-                app:layout_constraintBottom_toTopOf="@id/item_description_detail"
-                app:layout_constraintEnd_toEndOf="@id/guideline_end"
-                app:layout_constraintStart_toStartOf="@id/guideline_start"
-                app:layout_constraintTop_toBottomOf="@id/item_name"
-                tools:text="test" />
-
-            <TextView
-                android:id="@+id/item_description_detail"
-                style="@style/TextAppearance.Material3.TitleMedium"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/size_half"
-                android:text="@string/description"
-                android:textAppearance="?attr/textAppearanceListItem"
-                app:layout_constraintBottom_toTopOf="@id/item_description_value"
-                app:layout_constraintEnd_toEndOf="@id/guideline_end"
-                app:layout_constraintStart_toStartOf="@id/guideline_start"
-                app:layout_constraintTop_toBottomOf="@id/item_name_value" />
-
-            <TextView
-                android:id="@+id/item_description_value"
-                style="@style/TextAppearance.Material3.BodyLarge"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/size_regular"
-                android:textAppearance="?attr/textAppearanceListItem"
-                app:layout_constraintBottom_toTopOf="@id/item_genre"
-                app:layout_constraintEnd_toEndOf="@id/guideline_end"
-                app:layout_constraintStart_toStartOf="@id/guideline_start"
-                app:layout_constraintTop_toBottomOf="@id/item_description_detail"
-                tools:text="test" />
-
-            <TextView
-                android:id="@+id/item_genre"
-                style="@style/TextAppearance.Material3.TitleMedium"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/size_half"
-                android:text="@string/genre"
-                android:textAppearance="?attr/textAppearanceListItem"
-                app:layout_constraintBottom_toTopOf="@id/item_year"
-                app:layout_constraintEnd_toEndOf="@id/guideline_end"
-                app:layout_constraintStart_toStartOf="@id/guideline_start"
-                app:layout_constraintTop_toBottomOf="@id/item_description_value" />
-
-            <TextView
-                android:id="@+id/item_genre_value"
-                style="@style/TextAppearance.Material3.BodyLarge"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/size_regular"
-                android:textAppearance="?attr/textAppearanceListItem"
-                app:layout_constraintBottom_toTopOf="@id/item_year"
-                app:layout_constraintEnd_toEndOf="@id/guideline_end"
-                app:layout_constraintStart_toStartOf="@id/guideline_start"
-                app:layout_constraintTop_toBottomOf="@id/item_genre"
-                tools:text="test" />
-
-            <TextView
-                android:id="@+id/item_year"
-                style="@style/TextAppearance.Material3.TitleMedium"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/size_half"
-                android:text="@string/year"
-                android:textAppearance="?attr/textAppearanceListItem"
-                app:layout_constraintBottom_toTopOf="@id/item_year_value"
-                app:layout_constraintEnd_toEndOf="@id/guideline_end"
-                app:layout_constraintStart_toStartOf="@id/guideline_start"
-                app:layout_constraintTop_toBottomOf="@id/item_genre_value" />
-
-            <TextView
-                android:id="@+id/item_year_value"
-                style="@style/TextAppearance.Material3.BodyLarge"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/size_double"
-                android:textAppearance="?attr/textAppearanceListItem"
-                app:layout_constraintBottom_toTopOf="@id/item_definition"
-                app:layout_constraintEnd_toEndOf="@id/guideline_end"
-                app:layout_constraintStart_toStartOf="@id/guideline_start"
-                app:layout_constraintTop_toBottomOf="@id/item_year"
-                tools:text="test" />
-
-            <TextView
-                android:id="@+id/item_definition"
-                style="@style/TextAppearance.Material3.TitleMedium"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/size_half"
-                android:text="@string/definition"
-                android:textAppearance="?attr/textAppearanceListItem"
-                app:layout_constraintBottom_toTopOf="@id/item_definition_value"
-                app:layout_constraintEnd_toEndOf="@id/guideline_end"
-                app:layout_constraintStart_toStartOf="@id/guideline_start"
-                app:layout_constraintTop_toBottomOf="@id/item_year_value" />
-
-            <TextView
-                android:id="@+id/item_definition_value"
-                style="@style/TextAppearance.Material3.BodyLarge"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/size_double"
-                android:textAppearance="?attr/textAppearanceListItem"
-                app:layout_constraintBottom_toTopOf="@id/item_review"
-                app:layout_constraintEnd_toEndOf="@id/guideline_end"
-                app:layout_constraintStart_toStartOf="@id/guideline_start"
-                app:layout_constraintTop_toBottomOf="@id/item_definition"
-                tools:text="test" />
-
-            <TextView
-                android:id="@+id/item_review"
-                style="@style/TextAppearance.Material3.TitleMedium"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/size_half"
-                android:text="@string/review"
-                android:textAppearance="?attr/textAppearanceListItem"
-                app:layout_constraintBottom_toTopOf="@id/item_definition_value"
-                app:layout_constraintEnd_toEndOf="@id/guideline_end"
-                app:layout_constraintStart_toStartOf="@id/guideline_start"
-                app:layout_constraintTop_toBottomOf="@id/item_review_value" />
-
-            <TextView
-                android:id="@+id/item_review_value"
-                style="@style/TextAppearance.Material3.BodyLarge"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/size_double"
-                android:textAppearance="?attr/textAppearanceListItem"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@id/guideline_end"
-                app:layout_constraintStart_toStartOf="@id/guideline_start"
-                app:layout_constraintTop_toBottomOf="@id/item_review"
-                tools:text="test" />
-
-            <ImageView
-                android:id="@+id/iv_loading"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:adjustViewBounds="true"
-                android:contentDescription="@string/description"
-                android:fitsSystemWindows="false"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:showIn="@layout/fragment_item_list" />
+                app:layout_constraintTop_toBottomOf="@id/tv_recommendation"
+                app:layout_constraintVertical_chainStyle="spread"
+                tools:listitem="@layout/recommendation_item_list" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
-</FrameLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabmain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="20dp"
+        android:contentDescription="@string/description"
+        android:src="@drawable/ic_favorite_border_24"
+        app:fabSize="mini"
+        app:layout_anchor="@id/app_bar_layout"
+        app:layout_anchorGravity="bottom|end"
+        app:tint="@android:color/holo_red_dark" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

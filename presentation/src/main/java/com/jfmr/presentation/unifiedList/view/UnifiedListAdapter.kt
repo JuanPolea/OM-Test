@@ -24,7 +24,9 @@ class UnifiedListAdapter(
                     itemGenreValue.text = item.genre
                     itemYearValue.text = item.year.toString()
                 }
-                binding.itemImage.load(item.attachmentUI.first().value)
+                binding.itemImage.load(item.attachmentUI.first().value){
+                    crossfade(true)
+                }
             }
         }
     }
