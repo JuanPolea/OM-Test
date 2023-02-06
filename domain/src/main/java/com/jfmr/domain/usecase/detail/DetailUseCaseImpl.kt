@@ -1,14 +1,24 @@
 package com.jfmr.domain.usecase.detail
 
-import com.jfmr.domain.model.rtv1.RTV1DetailDomain
 import com.jfmr.domain.repository.detail.DetailRepository
+import com.jfmr.domain.repository.recommendations.RecommendationsRepository
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.zip
 import javax.inject.Inject
 
 class DetailUseCaseImpl @Inject constructor(
-    private val repository: DetailRepository
+    private val detailRepository: DetailRepository,
+    private val recommendationsRepository: RecommendationsRepository,
 ) : DetailUseCase {
 
-    override suspend operator fun invoke(externalId:String): RTV1DetailDomain? {
-        return repository.retrieveDetail(externalId)
+    override operator fun invoke(externalId: String) = flow {
+        detailRepository.retrieveDetail(externalId)
+            .zip(recommendationsRepository.retrieveRecommendations(externalId)) { basicInformation, recommendations ->
+                basicInformation?.copy(recommendations = recommendations)
+            }.first()
+            .also {
+                emit(it)
+            }
     }
 }

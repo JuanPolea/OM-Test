@@ -5,12 +5,22 @@
     android:id="@+id/fragment_unified_list"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/orange_200"
     tools:context="unifiedList.view.UnifiedListFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="0dp"
+            android:layout_height="?attr/actionBarSize"
+            android:contentDescription="@string/description"
+            app:layout_constraintBottom_toTopOf="@id/rv_unified_list"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_unified_list"
@@ -20,7 +30,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
             tools:context=".unifiedList.view.UnifiedListFragment"
             tools:listitem="@layout/fragment_item" />
 
